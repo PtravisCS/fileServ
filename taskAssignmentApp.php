@@ -41,8 +41,7 @@
           </button>
           <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">FileStore<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="chores.php">Chores</a></li>
-            <li><a href="mc.php">Minecraft</a></li>
+            <li><a href="main.php">FileStore</a></li>
           </ul>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">

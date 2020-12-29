@@ -80,8 +80,6 @@
           </button>
           <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">FileStore<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="chores.php">Chores</a></li>
-            <li><a href="https://ptserv.ddns.net:8000">Minecraft</a></li>
             <li><a href="taskAssignmentApp.php">Task Assignment App</a></li>
           </ul>
         </div>
