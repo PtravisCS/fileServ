@@ -35,7 +35,7 @@
         <div class="dropdown">
           <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">FileStore<span class="caret"></span></a>
           <ul class="dropdown-menu bg-dark">
-            <li><a href="main.php" class="navbar navbar-text">Files</a></li>
+            <li><a href="main.php" class="navbar navbar-text">FileStore</a></li>
             <li><a href="taskAssignmentApp.php" class="navbar navbar-text">Task Assignment App</a></li>
           </ul>
         </div>
