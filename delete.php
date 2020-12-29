@@ -19,7 +19,7 @@
 	  $q = $pdo->prepare($sql);
 	  $q->execute(array($id));
 	  Database::disconnect();
-	  header("Location: ../main.php");
+	  header("Location: main.php");
   }
   
 ?>
