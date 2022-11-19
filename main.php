@@ -1,20 +1,14 @@
 <?php
 
-  session_start();
-  if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-        // redirect to your login page
-        header("Location: login.php");
-  }
+  require 'database.php';
+  require 'functions.php';
 
-  if ($_SESSION['access_level'] > 0) {
-    define('ADMIN', TRUE);
-  } else {
-    define('ADMIN', FALSE);
-  }
+  session_start();
+  check_logged_in();
+  is_admin(); 
 
   $username = $_SESSION['username'];
   $profile_picture = $_SESSION['profile_picture'];
-  require 'database.php';
 
   if (isset($_FILES["upload"]["name"])) {
     $target_dir = "/media/main/www/html/fileServ/files/".$username."/";
@@ -65,43 +59,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
-    <!-- <link rel='stylesheet' type='text/css' href="css/mss.css"> -->
   <head>
 
   <body>
 
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span> 
-          </button>
-          <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">FileStore</span></a>
-          <!--
-          <ul class="dropdown-menu">
-            <li><a href="chores.php">Chores</a></li>
-            <li><a href="https://ptserv.ddns.net:8000">Minecraft</a></li>
-            <li><a href="taskAssignmentApp.php">Task Assignment App</a></li>
-          </ul>
-          -->
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <span class="nav navbar-right">
-            <a class='navbar-text dropdown-toggle' data-toggle="dropdown" href="#"><?php echo "<img src='".$profile_picture."' height='25px' width='25px' />"." ".$username ?><span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="updateUser.php">Settings</a>
-              </li>
-              <li>
-                <a href='logout.php'>Log Out</a>
-              </li>
-            </ul>
-          </span>
-        </div>
-      </div>
-    </nav>
+    <?php print_navbar($profile_picture, $username); ?>
 
     <div class="container-fluid">
       <div class="row">
@@ -148,6 +110,7 @@
               echo (in_array(strtolower($row['filetype']), $musics)) ? '<a class="btn btn-primary" href="'.$row['filePath'].'" target="_blank" >Listen</a>' : '';
               echo (in_array(strtolower($row['filetype']), ['txt','pdf'])) ? '<a class="btn btn-primary" href="'.$row['filePath'].'" target=_blank">Read</a>' : '';
               echo (in_array(strtolower($row['filetype']), ['xml','xlsx', 'ods'])) ? '<a class="btn btn-primary" href="spreadsheet_reader.php?id=' . $row['ID'] .'" target=_blank">View</a>' : '';
+              echo (in_array(strtolower($row['filetype']), ['zip'])) ? '<a class="btn btn-primary" href="archive_viewer.php?id=' . $row['ID'] .'" target=_blank">See Contents</a>' : '';
               echo '&nbsp;';
               echo '<a class="btn btn-success" href="'.$row['filePath'].'" download>Download</a>';
               echo '&nbsp;';
