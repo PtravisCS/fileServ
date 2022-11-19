@@ -147,6 +147,7 @@
               echo (in_array(strtolower($row['filetype']), $pictures)) ? '<a class="btn btn-primary" href="'.$row['filePath'].'" target="_blank" >View</a>' : '';
               echo (in_array(strtolower($row['filetype']), $musics)) ? '<a class="btn btn-primary" href="'.$row['filePath'].'" target="_blank" >Listen</a>' : '';
               echo (in_array(strtolower($row['filetype']), ['txt','pdf'])) ? '<a class="btn btn-primary" href="'.$row['filePath'].'" target=_blank">Read</a>' : '';
+              echo (in_array(strtolower($row['filetype']), ['xml','xlsx', 'ods'])) ? '<a class="btn btn-primary" href="spreadsheet_reader.php?filePath=' . $row['filePath'] .'" target=_blank">View</a>' : '';
               echo '&nbsp;';
               echo '<a class="btn btn-success" href="'.$row['filePath'].'" download>Download</a>';
               echo '&nbsp;';
