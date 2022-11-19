@@ -1,25 +1,50 @@
 <?php
 
+  require 'database.php';
+
   session_start();
   if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         header("Location: login.php");
   }
+  $username = $_SESSION['username'];
 
-  if (!empty($_GET['filePath'])) {
-    $file = str_replace("'", "", $_GET['filePath']);
+  if ($_SESSION['access_level'] > 0) {
+    define('ADMIN', TRUE);
+  } else {
+    define('ADMIN', FALSE);
   }
 
-  if (!empty($_POST)) {
-	  $id = $_POST['id'];
-    $file = $_POST['path'];
+  if (!empty($_GET['id'])) {
+    $id = str_replace("'", "", $_GET['id']);
+  } else {
+    exit("File ID not Provided");
   }
+
+  $pdo = Database::connect();
+  if (ADMIN === TRUE) {
+    $sql = 'SELECT filePath FROM `Files` WHERE `ID`= ' . $id . ' ORDER BY `filename`';
+    $data = $pdo->query($sql)->fetchAll();
+  } else {
+    $sql = 'SELECT filePath FROM `Files` WHERE `ID`= ? AND `username`= ? ORDER BY `filename`';
+    $q = $pdo->prepare($sql);
+    $q->execute([$id, $username]);
+    $data = $q->fetchAll();
+  }
+
+  $file = $data[0]['filePath'];
 
   require 'vendor/autoload.php';
 
   use PhpOffice\PhpSpreadsheet\Spreadsheet;
   use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+  use PhpOffice\PhpSpreadsheet\Reader\Ods;
 
-  $reader = new Xlsx();
+  if (preg_match('/\.ods/', $file)) {
+    $reader = new Ods();
+  } else {
+    $reader = new Xlsx();
+  }
+
   $reader->setReadDataOnly(TRUE);
   $spreadsheet = $reader->load($file);
   $worksheet = $spreadsheet->getActiveSheet();
