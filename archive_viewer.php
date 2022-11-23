@@ -24,10 +24,12 @@
 
   $pdo = Database::connect();
   if (ADMIN === TRUE) {
-    $sql = 'SELECT filename, filePath FROM `Files` WHERE `ID`= ' . $id . ' ORDER BY `filename`';
-    $data = $pdo->query($sql)->fetchAll();
+    $sql = 'SELECT filename, filePath FROM `Files` WHERE `ID`= ?';
+    $q = $pdo->prepare($sql);
+    $q->execute([$id]);
+    $data = $q->fetchAll();
   } else {
-    $sql = 'SELECT filename, filePath FROM `Files` WHERE `ID`= ? AND `username`= ? ORDER BY `filename`';
+    $sql = 'SELECT filename, filePath FROM `Files` WHERE `ID`= ? AND `username`= ?';
     $q = $pdo->prepare($sql);
     $q->execute([$id, $username]);
     $data = $q->fetchAll();
