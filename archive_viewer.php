@@ -64,14 +64,14 @@
     <div>
       <ul>
       <?php
-      for ($i = 0; $i<$entries; $i++) {
+        for ($i = 0; $i<$entries; $i++) {
 
-        $stat = $zip->statIndex($i);
-        echo '<li>' . $stat['name'] . '</li>';
+          $stat = $zip->statIndex($i);
+          echo '<li>' . $stat['name'] . '</li>';
 
-      }
+        }
 
-      $zip->close();
+        $zip->close();
       ?>
       </ul>
     </div>
