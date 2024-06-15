@@ -11,7 +11,7 @@
   $profile_picture = $_SESSION['profile_picture'];
 
   if (isset($_FILES["upload"]["name"])) {
-    $target_dir = "/media/main/www/html/fileServ/files/".$username."/";
+    $target_dir = __DIR__ . "/files/".$username."/";
     $target_file = $target_dir . basename($_FILES["upload"]["name"]);
     $web_target_file = "./files/".$username."/".basename($_FILES["upload"]["name"]);
     $uploadOk = 1;
