@@ -1,8 +1,7 @@
 
 <?php 
 	
-	require '../shared_tools/database.php';
-  require '../shared_tools/common_functions.php';
+	require 'recipeDatabase.php';
 
 	if ( !empty($_POST)) {
 		$nameError = null;
@@ -50,9 +49,11 @@
 
 <html lang="en">
 <head>
-  <title>Menu Creator and Recipe System</title>
-  <?php bootstrap_css(); ?>
-  <link rel="stylesheet" type="text/css" href="../css/mss.css">
+    <title>Menu Creator and Recipe System</title>
+    <link   href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/mss.css">
+            
 </head>
 
 <body>
@@ -119,7 +120,6 @@
 				
     </div> <!-- /container -->
 
-    <?php bootstrap_js(); ?>
     <script src="../js/nicEdit.js" type="text/javascript"></script>
     <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 

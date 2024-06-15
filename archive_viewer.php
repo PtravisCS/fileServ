@@ -1,7 +1,7 @@
 <?php
 
-  require '../shared_tools/database.php';
-  require '../shared_tools/functions.php';
+  require 'database.php';
+  require 'functions.php';
 
   session_start();
   if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
@@ -42,7 +42,6 @@
   $zip = new ZipArchive;
   $zip->open($file);
   $entries = $zip->count();
-  $zip->close($file);
 
 ?>
 
@@ -51,7 +50,9 @@
   <head>
     <title><?php echo (isset($fileName)) ? $fileName: "No Name";?></title>
     <link rel='stylesheet' type='text/css' href='./css/mss.css' />
-    <?php bootstrap_css(); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
   <head>
 
   <body>
@@ -63,18 +64,17 @@
     <div>
       <ul>
       <?php
-        $zip->open($file);
-        for ($i = 0; $i < $entries; $i++) {
+        for ($i = 0; $i<$entries; $i++) {
 
           $stat = $zip->statIndex($i);
           echo '<li>' . $stat['name'] . '</li>';
 
         }
+
         $zip->close();
       ?>
       </ul>
     </div>
 
-    <?php bootstrap_js(); ?>
   </body>
 </html>

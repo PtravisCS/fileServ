@@ -1,7 +1,7 @@
 <?php
 
-  require '../shared_tools/database.php';
-  require '../shared_tools/common_functions.php';
+  require 'database.php';
+  require 'functions.php';
 
   session_start();
   if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
@@ -60,7 +60,7 @@
     <title><?php echo (isset($fileName)) ? $fileName: "No Name";?></title>
     <link rel="stylesheet" href="./css/spreadsheet.css" />
     <link rel='stylesheet' type='text/css' href='./css/mss.css' />
-    <?php bootstrap_css(); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
 
   <body>
@@ -90,8 +90,12 @@
 
       </table>
     </div>
+
   </body>
-  <?php bootstrap_js(); ?>
+
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
 </html>
 
 <?php
