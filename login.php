@@ -6,7 +6,7 @@
         header("Location: main.php");
   }
 
-  require 'database.php';
+  require '../shared_tools/database.php';
   $username = null;
   $passwordError = null;
   $nameError = null;
