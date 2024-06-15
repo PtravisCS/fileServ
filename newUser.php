@@ -1,5 +1,6 @@
 <?php
-  require 'database.php';
+  require '../shared_tools/database.php';
+  require '../shared_tools/common_functions.php';
   
   if (!empty($_POST)) {
   
@@ -58,53 +59,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <link href='css/bootstrap.min.css' rel='stylesheet'>  
-
+  <?php bootstrap_css(); ?>
+  <title>New User</title>
 </head>
 <body>
 
-  <div class='container'>
-    <div class='span12'>
+  <div class="container">
+    <div class="card">
+      <form action="newUser.php" method="post">
 
-      <form action='newUser.php' method='post'>
-        <h3>New User</h3>
-        <div class='form-group'>
-          <label for='Name'>Name</label>
-          <input name='Name' id='Name' type='text' placeholder='Name' />
-          <?php if(!empty($NameError)): ?>
-            <span class='help-inline'><?php echo $NameError;?></span>
-          <?php endif; ?>
+        <div class="card-header">
+          <h4>New User</h4>
         </div>
-        <div class='form-group'>
-          <label for='Password'>Password</label>
-          <input name='Password' id='Password' type='password' placeholder='Password'/>
-          <?php if(!empty($PasswordError)): ?>
-            <span class='help-inline'><?php echo $PasswordError;?></span>
-          <?php endif; ?>
-        </div>
-        <div class='form-group'>
-          <label for='Verify'>Verify Password</label>
-          <input name='Verify' id='Verify' type='password' placeholder='Password' />
-          <?php if(!empty($VerifyError)): ?>
-            <span class='help-inline'><?php echo $VerifyError;?></span>
-          <?php endif; ?>
-        </div>
-        <div class='form-group'>
-          <label for='JoinCode'>Join Code</label>
-          <input name='JoinCode' id='JoinCode' type='text' placeholder='******' />
-          <?php if(!empty($CodeError)): ?>
-            <span class='help-inline'><?php echo $CodeError; ?></span>
-          <?php endif; ?>
-        </div>
-        <div class='form-actions'>
-          <button type='submit' class='btn btn-default'>Create User</button>
-          <a class='btn' href='login.php'>Cancel</a>
+
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" for="Name">Name</span>
+            <input name="Name" id="Name" class="form-control" type="text" placeholder="Name" required />
+            <?php if(!empty($NameError)): ?>
+              <span class="help-inline"><?php echo $NameError;?></span>
+            <?php endif; ?>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" for="Password">Password</span>
+            <input name="Password" id="Password" class="form-control" type="password" placeholder="Password"/>
+            <?php if(!empty($PasswordError)): ?>
+              <span class="help-inline"><?php echo $PasswordError;?></span>
+            <?php endif; ?>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" for="Verify">Verify Password</span>
+            <input name="Verify" id="Verify" class="form-control" type="password" placeholder="Password" />
+            <?php if(!empty($VerifyError)): ?>
+              <span class="help-inline"><?php echo $VerifyError;?></span>
+            <?php endif; ?>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" for="JoinCode">Join Code</span>
+            <input name="JoinCode" id="JoinCode" class="form-control" type="text" placeholder="******" />
+            <?php if(!empty($CodeError)): ?>
+              <span class="help-inline"><?php echo $CodeError; ?></span>
+            <?php endif; ?>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Create User</button>
+            <a class="btn btn-danger" href="login.php">Cancel</a>
+          </div>
         </div>
       </form>    
-
     </div>
   </div>
-
+  <?php bootstrap_js(); ?>
 </body>
 </html>
